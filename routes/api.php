@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+// use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,26 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::group(['prefix' => '/user', 'middleware'=>['guest:api'], 'namespace' => 'Api' ], function(){
+
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/register', [AuthController::class, 'register']);
+    // Route::post('/forget-password', [AuthController::class, 'forget']);
+    // Route::post('/forget-token', [AuthController::class, 'forget_token']);
+});
+
+Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'Api'  ], function(){
+    // Route::get('/logout', [AuthController::class, 'logout']);
+    // Route::post('/update-profile', [AuthController::class, 'update_profile']);
+    // Route::post('/update-profile-pic', [AuthController::class, 'update_profile_pic']);
+    // Route::get('/all-user', [AuthController::class, 'all_user']);
+    // Route::post('/add-new-user', [AuthController::class, 'add_new_user']); // Note work
+    // Route::post('/delete', [AuthController::class, 'delete']); // Note work
+
+    // Route::get('/user-list-for-select2', [AuthController::class, 'user_list_for_select2']);
+
+
+});
+

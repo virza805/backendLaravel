@@ -1,35 +1,51 @@
 <?php
 /*
+15:19s / 17:57s |=> https://www.youtube.com/watch?v=ujoD8eKIv-k&list=PL03GdZZs-POVHXjxjyKegmsvOiQVXpb7O&index=10
+
+
 composer create-project laravel/laravel:^8.0 backendLaravel
 cd backendLaravel
-php artisan serve
+php artisan serve |=> for run this
 
 =========== >>>> = Backend (php artisan serve) = <<<<============
  class 9 -> https://www.youtube.com/watch?v=2Vrf3RilK6Q&list=PL9piC5qJFU82wfvJPqyr7RLkDUEV9D4t6&index=9
-# composer global require laravel/installer |=> for global install
-# laravel new backend => for new install Laravel package ||
-# cd backend
+
 # composer require laravel/ui => for authantication
 # php artisan ui vue --auth => for create authnatication folder
 # npm install => npm run dev |npm install vue-loader@^15.9.7 --save-dev --legacy-peer-deps| npm run development
 #  =>
-# backend =>connect Database from .env file
-# php artisan serve => for run this
 
 
 
-
+# backend |=>connect Database from .env file
 # composer require laravel/passport => https://laravel.com/docs/8.x/passport
 # php artisan migrate =>
 # php artisan passport:install =>{
+    Encryption keys generated successfully.
     Personal access client created successfully.
     Client ID: 1
-    Client secret: UFCEA9vAzdIK5ZwfkWo8kcf933urpDMJk0Jb0bp2
+    Client secret: yckjuGsCPdFeI4owQZFYyfGvD7jKaQnl9IlPJJ2L
     Password grant client created successfully.
     Client ID: 2
-    Client secret: h7dwavC0XqmGj8MjBneMPIIIo0pE09i6s04TcD36
-    }
-# php artisan passport:keys => if download github file then run this
+    Client secret: ChNUrIuSupxmaTC3waClrc7A8AFmoo0BzOEhUjZc
+
+    }php artisan passport:keys => if download github file then run this
+
+php artisan passport:install --uuids
+php artisan make:controller Api/AuthController =>
+php artisan rout:list
+
+php artisan make:request RegisterRequest =>
+php artisan make:request LoginRequest =>
+
+
+
+
+
+
+
+
+#
 #  =>
 #  =>
 # php artisan make:controller Api/AuthController =>
