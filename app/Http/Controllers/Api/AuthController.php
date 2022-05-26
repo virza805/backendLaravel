@@ -22,7 +22,6 @@ class AuthController extends Controller
 
 
         $data = $request->only(['name', 'email', 'password']);
-        // $data['role_serial'] = 4;
         $data['password'] = Hash::make($request->password);
         $user = User::create($data);
 
@@ -30,79 +29,62 @@ class AuthController extends Controller
             'message' => 'User registered successfully',
             'data' => $user
         ];
-
-        // $validator = Validator::make($request->all(), [
-        //     'name' => ['required', 'min:4'],
-        //     // 'email' => ['required', 'email', 'exists:users'],
-        //     'email' => ['required', 'email', 'unique:users'],
-        //     'password' => ['required', 'min:8', 'confirmed'],
-        // ]);
-
-        // if($validator->fails()) {
-        //     return response()->json([
-        //         'err_message' => 'validation error',
-        //         'data' => $validator->errors(),
-        //     ], 422);
-        // }else{
-        //     $data = $request->only(['name', 'email', 'password']);
-        //     $data['role_serial'] = 4;
-        //     $data['password'] = Hash::make($request->password);
-        //     $user = User::create($data);
-
-        //     Auth::login($user);
-        //     $user = User::where('id',Auth::user()->id)->with('user_role')->first();
-        //     $data['access_token'] = $user->createToken('accessToken')->accessToken;
-        //     $data['user'] = $user;
-        //     return response()->json($data, 200,);
-
-        // }
     }
+
+    // public function login(LoginRequest $request) {
+
+    //     if (!auth()->attempt($request->only('email', 'password'))) {
+    //         throw new AuthenticationException('Invalid credential');
+    //     }
+
+
+    //     return [
+    //         'message' => 'Login successful',
+    //         'token' => auth()->user()->createToken('access-token')->plainTextToken
+    //     ];
+
+    // }
 
     public function login(LoginRequest $request) {
+        $validator = Validator::make($request->all(), [
+            'email' => ['required', 'email', 'exists:users'],
+            'password' => ['required', 'min:8'],
+        ]);
 
-        if (!auth()->attempt($request->only('email', 'password'))) {
-            throw new AuthenticationException('Invalid credential');
+        if($validator->fails()) {
+            return response()->json([
+                'err_message' => 'validation error',
+                'data' => $validator->errors(),
+            ], 422);
+        } else {
+
+        $req_data = request()->only('email', 'password');
+            if(Auth::attempt($req_data)) {
+                // $user = User::where('id',Auth::user()->id)->with('role')->first();
+                $user = User::where('id',Auth::user()->id)->first();
+                $data['access_token'] = $user->createToken('accessToken')->accessToken;
+                $data['user'] = $user;
+                return response()->json($data, 200,);
+            }else{
+                $data['message'] = 'user not exists!!';
+                $data['data']['email'] = ['email or password incorrect'];
+                $data['data']['password'] = ['email or password incorrect'];
+
+                return response()->json($data, 401);
+            }
         }
-
-        return [
-            'message' => 'Login successful',
-            'token' => auth()->user()->createToken('access-token')->plainTextToken
-        ];
-        // $validator = Validator::make($request->all(), [
-        //     'email' => ['required', 'email', 'exists:users'],
-        //     'password' => ['required', 'min:8'],
-        // ]);
-
-        // if($validator->fails()) {
-        //     return response()->json([
-        //         'err_message' => 'validation error',
-        //         'data' => $validator->errors(),
-        //     ], 422);
-        // } else {
-
-        // $req_data = request()->only('email', 'password');
-        //     if(Auth::attempt($req_data)) {
-        //         $user = User::where('id',Auth::user()->id)->with('user_role')->first();
-        //         $data['access_token'] = $user->createToken('accessToken')->accessToken;
-        //         $data['user'] = $user;
-        //         return response()->json($data, 200,);
-        //     }else{
-        //         $data['message'] = 'user not exists!!';
-        //         $data['data']['email'] = ['email or password incorrect'];
-        //         $data['data']['password'] = ['email or password incorrect'];
-
-        //         return response()->json($data, 401);
-        //     }
-        // }
     }
 
 
-    // public function logout() {
-    //     // Auth::user()->token()->revoke();
-    //     return response()->json([
-    //         'message' => 'logout',
-    //     ], 200);
-    // }
+    public function logout(Request $request) {
+
+        // $request->auth()->user()->currentAccessToken()->delete();
+        $request->user()->token()->revoke();
+
+        return response()->json([
+            'message' => 'Successfully logged out'
+        ], 200);
+    }
 
 
     // public function update_profile(Request $request) {

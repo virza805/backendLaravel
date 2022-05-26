@@ -29,7 +29,8 @@ php artisan serve |=> for run this
     Client ID: 2
     Client secret: ChNUrIuSupxmaTC3waClrc7A8AFmoo0BzOEhUjZc
 
-    }php artisan passport:keys => if download github file then run this
+    }php artisan passport:keys => if download github file then run this || php artisan passport:client --personal
+
 
 php artisan passport:install --uuids
 php artisan make:controller Api/AuthController =>
