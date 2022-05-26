@@ -1,0 +1,304 @@
+{
+	"info": {
+		"_postman_id": "b8bef7e2-23f2-4089-9ad1-259bae4f3ab3",
+		"name": "backendLaravel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18110748"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "test",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api}}/api/user",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "user@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api}}/api/user/login",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						},
+						"description": "Login user with email add password\n\n**Allowed payload**\n\n*   email: string (required)\n*   password: string (required)"
+					},
+					"response": []
+				},
+				{
+					"name": "Resend Verification Email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{api}}/api/user/resend-verification-email",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"resend-verification-email"
+							]
+						},
+						"description": "Login user with email add password\n\n**Allowed payload**\n\n*   email: string (required)\n*   password: string (required)"
+					},
+					"response": []
+				},
+				{
+					"name": "Password Reset Link Send by Email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "user@mail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api}}/api/user/forgot-password",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"forgot-password"
+							]
+						},
+						"description": "Request for forgot password without login\n\n**Allowed payload**\n\n*   email: string (required)"
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Admin",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "admin@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api}}/api/user/register",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						},
+						"description": "Register new user\n\n**Allowed payload**\n\n*   username: string (required)\n*   email: string (required)\n*   password: string (required)\n*   password_confirmation: string (required)"
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Admin",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "admin@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api}}/api/user/reset-password",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"reset-password"
+							]
+						},
+						"description": "Reset user password using reset token\n\n**Allowed payload**\n\n*   token: string (required)\n*   email: string (required)\n*   password: string (required)\n*   password_confirmation: string (required)"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NjYzNWNhNi1hZTA3LTQ5MzItYTMzYi1lMjhmNmMxMjUyOTIiLCJqdGkiOiI2MzJjNTY4YWFkM2E4YTM1N2FjODEwMGM2OGI2NDJkYzk0NDM4YzQxMGFkNDEyMjZiOGZiMWZmMzE1YWZlODg3OGJmYzQ4MGFjMGI5NjZhZiIsImlhdCI6MTY1MzUzNzYyOC4yMTY4NTUsIm5iZiI6MTY1MzUzNzYyOC4yMTY4NiwiZXhwIjoxNjg1MDczNjI4LjA3NTUzMywic3ViIjoiMSIsInNjb3BlcyI6W119.jeqbE83LDT1ndaeebdqZqkQpVzTimozhgKmfmuR8IDxVemvUn24QQxtsaC7Yp7XLDmtnGw9mGwIQU-E4zeMrd1lmQXBrb__WhREGlXnYahcj5ngiK-nzB82kY_c3_QycSmtXj4a7UXojr-tJVJx2Faq6fEkVFIdXd5ulhPFh0ykOYyYP6n2gpEaFCmmAqoZvg-RtxeMkD834ClqmCOCDkh60QvSe89L8CxfhoW0iYsMenJC0dxtFdoT4E6mvpBDXRTSCWDoo5EqIVzEafWmpad0-if6iDrs4_JQNd0h94453N9KPK98hR8weaomct9N08xb1-8rIDZioes2iEpQfSnH8D-RXsLEbANat7eFHDgaw5RPSXUuycQJnBCycmnz-0swKFLT5ua0pSRnw4WCNj13fvyIkw4jTxlBOjQllVJlrye4WEfzBj34-63Z3rdVtx1CHawiNIE7Y5vauexGILdUXCh1KgPZl8gG9dUHlSGGX_bHL6r_BsHmlBf3VPt5N6xhthykS92bTTl24YJC9o1EiqfhZkdT6QIaIT-l7Ld4ESFw25Fz9Ph8RgWIxYRAYfMCdJFd9CA-QTgwjEFrp1oCP_0ee58DOnzfAhShk6PJ8wiaQ0LVfMSBVJ5UO9EgesnRBjkvtmFwS2tysJ5sXmgsXM0EfSzkaYT7sj1z3zu4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{api}}/api/user/logout",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"logout"
+							]
+						},
+						"description": "Logout current user"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
