@@ -1,6 +1,6 @@
 <?php
 /*
-15:19s / 17:57s |=> https://www.youtube.com/watch?v=ujoD8eKIv-k&list=PL03GdZZs-POVHXjxjyKegmsvOiQVXpb7O&index=10
+18:19s / 20:21s |=> https://www.youtube.com/watch?v=o9uIMkknJBw&list=PL03GdZZs-POVHXjxjyKegmsvOiQVXpb7O&index=20
 
 
 composer create-project laravel/laravel:^8.0 backendLaravel
@@ -38,6 +38,7 @@ php artisan rout:list
 
 php artisan make:request RegisterRequest =>
 php artisan make:request LoginRequest =>
+php artisan make:request PasswordResetRequest =>
 
 
 
@@ -111,10 +112,22 @@ DB_PORT=3306
 DB_DATABASE=kleauia_apilaravelvue
 DB_USERNAME=kleauia_apilaravelvue
 DB_PASSWORD=9qG?O,gL^6U2
+______________________________________________________________
 
+Thanks for contacting us! We will get in touch with you shortly.
 
+email body {
+Hello Tanvir,
 
+This is an automated reply to let you know that your ticket has been received.
 
+Note, our standard office hours are 9am to 4pm Bangladesh Standard Time (UTC/GMT +6 hours
+Time Zone in Dhaka, Bangladesh), Monday through Friday.
+
+We will be with you as soon as we are able.
+
+Thanks!
+}
 
 
 

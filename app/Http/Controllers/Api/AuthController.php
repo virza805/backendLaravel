@@ -5,14 +5,18 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\PasswordResetRequest;
 use App\Mail\ForgetPassword;
 use App\Models\User;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
 use PhpParser\Node\Expr\New_;
 
@@ -24,6 +28,8 @@ class AuthController extends Controller
         $data = $request->only(['name', 'email', 'password']);
         $data['password'] = Hash::make($request->password);
         $user = User::create($data);
+
+        event(new Registered($user));
 
         return [
             'message' => 'User registered successfully',
@@ -79,6 +85,7 @@ class AuthController extends Controller
     public function logout(Request $request) {
 
         // $request->auth()->user()->currentAccessToken()->delete();
+        // $request->auth()->user()->withAccessToken()->delete();
         $request->user()->token()->revoke();
 
         return response()->json([
@@ -122,6 +129,33 @@ class AuthController extends Controller
     // }
 
 
+    /**
+     * Forgot user Password Request
+     * @param forgotPasswordRequest $request
+     * @return array
+    */
+
+    public function forgotPassword(Request $request) {
+        $request->validate([
+            'email' => ['required', 'email', 'exists:users']
+        ]);
+
+        $status = Password::sendResetLink([
+            'email' => $request->email
+        ]);
+
+
+        if($status !== Password::RESET_LINK_SENT){
+            return response()->json([
+                'message' => 'Could not reset your password, please try again.'
+            ], Response::HTTP_FORBIDDEN);
+        }
+
+        return [
+            'message' => 'Password reset link sent'
+        ];
+    }
+
     // public function forget(Request $request)
     // {
     //     $validator = Validator::make($request->all(), [
@@ -135,12 +169,43 @@ class AuthController extends Controller
     //         ], 422);
     //     }
     //     $user = User::where('email',$request->email)->first();
-    //     $user->forget_token = Hash::make(uniqid(50));
+    //     $user->forget_token = Hash::make(uniqid(20));
     //     $user->save();
 
     //     // hello@example.com | b4b806696d02e8
     //     return Mail::to($user['email'])->send(new ForgetPassword($user->forget_token));
     // }
+
+    /**
+     * Reset Password using token
+     * @param PasswordResetRequest $request
+     * @return array
+    */
+
+    public function resetPassword(PasswordResetRequest $request) {
+
+        // email, password, token
+        $status = Password::reset($request->only('email', 'token', 'password'),
+        // $status['password'] = Hash::make($request->password),
+         function($user) use($request){
+            $user->update([
+                'password' => Hash::make($request->password)
+            ]);
+        });
+
+        if($status !== Password::PASSWORD_RESET){
+            return response()->json([
+                'message' => 'Could not reset your password, please try again.'
+            ], Response::HTTP_FORBIDDEN);
+        }
+
+
+        return [
+            'message' => 'Password updated successfully'
+        ];
+
+
+    }
 
     // public function forget_token(Request $request)
     // {
@@ -258,5 +323,46 @@ class AuthController extends Controller
 
     //     return response()->json($book, 200);
     // }
+
+
+    /**
+     * Verification email
+     * @param Request $request
+     * @return array
+    */
+    public function verifyEmail(Request $request) {
+
+        auth()->loginUsingId($request->id);
+
+        if($request->user()->hasVerifiedEmail()) {
+            return response()->json([
+                'message' => 'you have already verify your email address'
+            ], Response::HTTP_FORBIDDEN);
+        }
+
+        $request->user()->markEmailAsVerified();
+
+        return redirect( env('CLIENT_URL') . '?verified=1' );
+    }
+
+    /**
+     * Resend verification email
+     * @param Request $request
+     * @return array
+    */
+    public function resendVerificationEmail(Request $request) {
+
+        if($request->user()->hasVerifiedEmail()) {
+            return response()->json([
+                'message' => 'you have already verify your email address'
+            ], Response::HTTP_FORBIDDEN);
+        }
+
+        $request->user()->sendEmailVerificationNotification();
+
+        return [
+            'message' => 'Verification email sent'
+        ];
+    }
 
 }
