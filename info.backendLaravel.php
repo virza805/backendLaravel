@@ -39,6 +39,7 @@ php artisan rout:list
 php artisan make:request RegisterRequest =>
 php artisan make:request LoginRequest =>
 php artisan make:request PasswordResetRequest =>
+php artisan make:notification CustomPasswordResetNotification =>
 
 
 
