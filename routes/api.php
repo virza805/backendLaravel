@@ -26,7 +26,7 @@ Route::group(['prefix' => '/user', 'middleware'=>['guest:api'], 'namespace' => '
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
     // Route::post('/forget-password', [AuthController::class, 'forget']);
-    Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
+    Route::post('/forgot-password', [AuthController::class, 'forgotPassword']); // password Reset Link Send by email
     // Route::post('/forget-token', [AuthController::class, 'forget_token']);
     Route::post('/reset-password', [AuthController::class, 'resetPassword']);
     Route::get('/verify-email', [AuthController::class, 'verifyEmail'])
@@ -50,4 +50,4 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
 
 Route::get('/test', function() {
     return "heyyy this is a very secret router";
-})->middleware('auth:api','verify');
+})->middleware('auth:api','verified');
