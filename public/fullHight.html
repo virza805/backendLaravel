@@ -7,34 +7,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+nav.backend_menu {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.backend_wrapper ul {
+    list-style: none;
+}
+.backend_wrapper ul a{
+    text-decoration: none;
+    color: #7b7979;
+}
+
+nav.backend_menu ul {
+    display: flex;
+}
+
+nav.backend_menu ul li a {
+    text-decoration: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    color: #222;
+}
+
+nav.backend_menu ul li button {
+    border: 0;
+    padding: 5px 10px;
+    font-size: 16px;
+    color: #222;
+}
+
+nav.backend_menu ul li:hover a {
+    color: #000;
+    background: #eaebeb;
+}
+/* The end backend nav bar */
+
         /* / Safari syntax / */
-        
+
          :-webkit-full-screen {
             background-color: yellow;
         }
         /* / IE11 / */
-        
+
          :-ms-fullscreen {
             background-color: yellow;
         }
         /* / Standard syntax / */
-        
+
          :fullscreen {
             background-color: yellow;
         }
         /* / Style the button / */
-        
+
         button {
             padding: 20px;
             font-size: 20px;
         }
-        
+
         .default {
             margin-left: 200px;
             background: red;
             color: #fff;
         }
-        
+
         .active {
             margin-left: 50px;
             background: green;
@@ -45,23 +83,29 @@
 
 <body>
     <div class="backend_wrapper">
-        <nav class="ul">
-            <li><button class="default" id="myButton">Toggle btn</button></li>
-            <li><a href="#">Home</a></li>
-            <li>
-                <a href="#">About</a>
-            </li>
-        </nav>
-        <nav class="ul">
-            <li>
-                <a href="">maximize</a>
-            </li>
-            <li>
-                <a href="">minimize</a>
-            </li>
-            <li>
-                <a href="">Frontend Logo</a>
-            </li>
+        <nav class="backend_menu">
+            <ul>
+                <li><button  class="default" id="myButton">
+                    <img src="imgs/arrow-left.svg" alt="">
+                    <img  src="imgs/arrow-right.svg" alt="">
+                </button></li>
+                <li><a href="#">Home</a></li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li>
+                    <a href=""><img src="imgs/maximize-2.svg" alt="maximize"></a>
+                </li>
+                <li>
+                    <a href=""><img src="imgs/minimize-2.svg" alt="minimize"></a>
+                </li>
+                <li>
+                    <a href="">Frontend Logo</a>
+                </li>
+            </ul>
         </nav>
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
@@ -770,6 +814,7 @@
             </div>
             <!-- /.sidebar -->
         </aside>
+
         <div class="content-wrapper">
             <h2>Fullscreen with JavaScript</h2>
             <p>Click on the "Open Fullscreen" button to open this page in fullscreen mode. Close it by either clicking the "Esc" key on your keyboard, or with the "Close Fullscreen" button.</p>
