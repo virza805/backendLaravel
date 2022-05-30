@@ -145,24 +145,6 @@
             min-height: 100%;
         }
 
-        .backend_layout_fixed #backendWrapper .sidebar {
-            height: calc(100vh - (3.5rem + 1px));
-            overflow: hidden !important;
-            position: relative;
-            overflow: visible!important;
-            flex-direction: column;
-            flex-wrap: nowrap;
-            justify-content: flex-start;
-            align-content: flex-start;
-            align-items: flex-start;
-            overflow-x: none;
-            overflow-y: initial;
-            padding-bottom: 0;
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
-            padding-top: 0;
-        }
-
         .backend_layout_fixed aside.main_sidebar a {
             text-decoration: none;
             color: #fff !important;
@@ -220,12 +202,59 @@
         .backend_content_wrapper {
             transition: margin-left .3s ease-in-out;
         }
+        .backend_layout_fixed ul.left_sidebar {
+            margin: 0;
+            padding: 10px;
+        }
 
-        .dropdown-container {
-            display: none;
-            background-color: #a9a6a6;
+        .backend_layout_fixed ul.left_sidebar li {
+            padding: 7px 0;
+        }
+        .backend_layout_fixed ul.left_sidebar li a {
+            font-size: 16px;
+        }
+        .backend_layout_fixed ul.left_sidebar li > ul li a {
+            font-size: 14px;
+        }
+
+        .backend_layout_fixed ul.left_sidebar li > ul {
+            /* list-style: circle !important; */
+            /* list-style: square !important; */
+            list-style: bengali !important;
+            margin-left: 10px;
+            padding: 0;
             padding-left: 8px;
         }
+        .backend_layout_fixed ul.left_sidebar li > ul li::marker {
+            color: #0eef0a;
+        }
+
+        .backend_layout_fixed ul.left_sidebar li:hover > a{
+            color: #0eef0a !important;
+        }
+        .dropdown-container {
+            display: none;
+        }
+
+        ::-webkit-scrollbar {
+        width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+        background: #8e8e8e;
+        border-radius: 20px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+        background: rgb(191, 191, 191);
+        }
+
+        .backend_layout_fixed a:hover {
+            color: rgb(0, 0, 0);
+        }
+
     </style>
 </head>
 <!-- https://feathericons.com/ -->
@@ -245,6 +274,10 @@
                     <a href="#">About</a>
                 </li>
             </ul>
+
+            <div class="clock">
+                <div id="clock">00:00:00</div>
+            </div>
 
             <ul>
                 <li class="fullScreen_on_off" id="fullScreen">
@@ -288,7 +321,6 @@
                     </li>
 
 
-
                     <li class="  ">
                         <a href="#" class="dropdown-btn active">Tanjil</a>
                         <ul class="     dropdown-container">
@@ -301,10 +333,22 @@
                             <li class=" ">
                                 <a href="#" class="   ">Dashboard v3</a>
                             </li>
+                            <li class=" ">
+                                <a href="#" class="   ">Dashboard v3</a>
+                            </li>
+                            <li class=" ">
+                                <a href="#" class="   ">Dashboard v3</a>
+                            </li>
+                            <li class=" ">
+                                <a href="#" class="   ">Dashboard v3</a>
+                            </li>
                         </ul>
                     </li>
 
                 </ul>
+            </div>
+            <div class="analock_clock" style="display: flex; justify-content: center;">
+                <canvas id="canvas" width="130" height="130" style="text-align:center"></canvas>
             </div>
             <!-- sidebar menu the end -->
         </aside>
@@ -312,683 +356,8 @@
         <div class="backend_content_wrapper">
             <h2>Fullscreen with JavaScript</h2>
             <p>Click on the "Open Fullscreen" button to open this page in fullscreen mode. Close it by either clicking the "Esc" key on your keyboard, or with the "Close Fullscreen" button.</p>
-            <p>Click on the "Open Fullscreen" button to open this page in fullscreen mode. Close it by either clicking the "Esc" key on your keyboard, or with the "Close Fullscreen" button.</p>
-            <p>Click on the "Open Fullscreen" button to open this page in fullscreen mode. Close it by either clicking the "Esc" key on your keyboard, or with the "Close Fullscreen" button.</p>
-            <ul>
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="  ">
-                    <a href="#" class="dropdown-btn active"> Dashboard</a>
-                    <ul class="     dropdown-container">
-                        <li class=" ">
-                            <a href="#" class="  ">Dashboard v1</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v2</a>
-                        </li>
-                        <li class=" ">
-                            <a href="#" class="   ">Dashboard v3</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
 
 
-            <p>Click on the "Open Fullscreen" button to open this page in fullscreen mode. Close it by either clicking the "Esc" key on your keyboard, or with the "Close Fullscreen" button.</p>
-            <p>Click on the "Open Fullscreen" button to open this page in fullscreen mode. Close it by either clicking the "Esc" key on your keyboard, or with the "Close Fullscreen" button.</p>
-            <p>Click on the "Open Fullscreen" button to open this page in fullscreen mode. Close it by either clicking the "Esc" key on your keyboard, or with the "Close Fullscreen" button.</p>
-
-            <!-- <button onclick="openFullscreen();">Open Fullscreen</button>
-            <button onclick="closeFullscreen();">Close Fullscreen</button> -->
-
-
-
-            <!-- <div id="backendWrapper" class="left_sidebar_show">
-                I want this div to toggle between the 'show' class and the 'hide' class
-            </div> -->
         </div>
 
         <footer class="main-footer">
@@ -1062,7 +431,121 @@
                 }
             });
         }
+
+        // js-project Digital Clock rightSide
+    function startTime() {
+        const now = new Date();
+        let h = now.getHours(); // 0 - 23
+        let m = now.getMinutes(); // 0 - 59
+        let s = now.getSeconds(); // 0 - 59
+        let session = "am";
+
+        if (h == 0) {
+            h = 12;
+        }
+
+        if (h > 12) {
+            h = h - 12;
+            session = "pm";
+        }
+        m = (m < 10) ? "0" + m : m;
+
+        const time = h + ":" + m + ":" + s + " " + session;
+        document.querySelector('#clock').innerHTML = time;
+
+        setTimeout(startTime, 500);
+
+    }
+    startTime();
+
+
+
+    //  Clock -
+
+
+    var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        var radius = canvas.height / 2;
+        ctx.translate(radius, radius);
+        radius = radius * 0.90
+        setInterval(drawClock, 1000);
+
+        function drawClock() {
+            drawFace(ctx, radius);
+            drawNumbers(ctx, radius);
+            drawTime(ctx, radius);
+        }
+
+        function drawFace(ctx, radius) {
+            var grad;
+            ctx.beginPath();
+            ctx.arc(0, 0, radius, 0, 2 * Math.PI);
+            ctx.fillStyle = 'white';
+            ctx.fill();
+            grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05);
+            grad.addColorStop(0, '#333');
+            grad.addColorStop(0.5, 'white');
+            grad.addColorStop(1, '#333');
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = radius * 0.1;
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI);
+            ctx.fillStyle = '#333';
+            ctx.fill();
+        }
+
+        function drawNumbers(ctx, radius) {
+            var ang;
+            var num;
+            ctx.font = radius * 0.15 + "px arial";
+            ctx.textBaseline = "middle";
+            ctx.textAlign = "center";
+            for (num = 1; num < 13; num++) {
+                ang = num * Math.PI / 6;
+                ctx.rotate(ang);
+                ctx.translate(0, -radius * 0.85);
+                ctx.rotate(-ang);
+                ctx.fillText(num.toString(), 0, 0);
+                ctx.rotate(ang);
+                ctx.translate(0, radius * 0.85);
+                ctx.rotate(-ang);
+            }
+        }
+
+        function drawTime(ctx, radius) {
+            var now = new Date();
+            var hour = now.getHours();
+            var minute = now.getMinutes();
+            var second = now.getSeconds();
+            //hour
+            hour = hour % 12;
+            hour = (hour * Math.PI / 6) +
+                (minute * Math.PI / (6 * 60)) +
+                (second * Math.PI / (360 * 60));
+            drawHand(ctx, hour, radius * 0.5, radius * 0.07);
+            //minute
+            minute = (minute * Math.PI / 30) + (second * Math.PI / (30 * 60));
+            drawHand(ctx, minute, radius * 0.8, radius * 0.07);
+            // second
+            second = (second * Math.PI / 30);
+            drawHand(ctx, second, radius * 0.9, radius * 0.02);
+        }
+
+        function drawHand(ctx, pos, length, width) {
+            ctx.beginPath();
+            ctx.lineWidth = width;
+            ctx.lineCap = "round";
+            ctx.moveTo(0, 0);
+            ctx.rotate(pos);
+            ctx.lineTo(0, -length);
+            ctx.stroke();
+            ctx.rotate(-pos);
+        }
+
+
     </script>
+
 
 </body>
 
