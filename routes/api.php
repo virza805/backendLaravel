@@ -36,10 +36,11 @@ Route::group(['prefix' => '/user', 'middleware'=>['guest:api'], 'namespace' => '
 
 Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'Api'  ], function(){
     Route::get('/logout', [AuthController::class, 'logout']);
+    Route::get('/user', [AuthController::class, 'current_user']);
     Route::post('/resend-verification-email', [AuthController::class, 'resendVerificationEmail']);
     // Route::post('/update-profile', [AuthController::class, 'update_profile']);
     // Route::post('/update-profile-pic', [AuthController::class, 'update_profile_pic']);
-    // Route::get('/all-user', [AuthController::class, 'all_user']);
+    Route::get('/all-user', [AuthController::class, 'all_user']);
     // Route::post('/add-new-user', [AuthController::class, 'add_new_user']); // Note work
     // Route::post('/delete', [AuthController::class, 'delete']); // Note work
 

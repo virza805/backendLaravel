@@ -240,11 +240,19 @@ class AuthController extends Controller
 
 
     // // Show all user in Admin panel
-    // public function all_user(Request $request)
-    // {
-    //     $user_list = User::latest()->orderBy('id', 'DESC')->paginate(10);
-    //     return response()->json($user_list, 200);
-    // }
+    public function all_user(Request $request)
+    {
+        $user_list = User::latest()->orderBy('id', 'DESC')->paginate(10);
+        return response()->json($user_list, 200);
+    }
+
+    // // Show Only Current user in Admin panel
+    public function current_user(Request $request)
+    {
+        $user_current = auth()->user();
+        // $user = Auth::user();
+        return response()->json($user_current, 200);
+    }
 
     // // Add New User in Admin panel
     // public function add_new_user(Request $request)
