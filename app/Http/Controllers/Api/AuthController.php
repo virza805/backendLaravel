@@ -94,6 +94,40 @@ class AuthController extends Controller
     }
 
 
+    /**
+     * User Update Profile
+     * @param Request $request
+     * @return array
+    */
+
+
+    public function update_profile(Request $request)
+    {
+        $user = auth('api')->user();
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => ['required', 'unique:users', 'email', $user->id],
+            'password' => ['min:8', 'sometimes', 'nullable'],
+            'role' => ['sometimes', 'required'],
+        ]);
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => $request->role,
+        ]);
+
+        if($request->password) {
+            $user->update([
+            'password' => bcrypt($request->password),
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'user' => $user
+        ], 200);
+    }
     // public function update_profile(Request $request) {
     //     $validator = Validator::make($request->all(), [
     //         'name' => ['required', 'min:4'],
