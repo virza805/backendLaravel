@@ -111,17 +111,17 @@ class AuthController extends Controller
             'role' => ['sometimes', 'required'],
         ]);
 
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'role' => $request->role,
-        ]);
+        // $user->update([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'role' => $request->role,
+        // ]);
 
-        if($request->password) {
-            $user->update([
-            'password' => bcrypt($request->password),
-            ]);
-        }
+        // if($request->password) {
+        //     $user->update([
+        //     'password' => bcrypt($request->password),
+        //     ]);
+        // }
 
         return response()->json([
             'success' => true,
@@ -384,7 +384,7 @@ class AuthController extends Controller
 
         $request->user()->markEmailAsVerified();
 
-        return redirect( env('CLIENT_URL') . '?verified=1' );
+        return redirect( env('CLIENT_URL') . '/backend/?verified=1' );
     }
 
     /**
