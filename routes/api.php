@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // use Illuminate\Support\Facades\Auth;
@@ -25,13 +26,14 @@ Route::group(['prefix' => '/user', 'middleware'=>['guest:api'], 'namespace' => '
 
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
-    // Route::post('/forget-password', [AuthController::class, 'forget']);
     Route::post('/forgot-password', [AuthController::class, 'forgotPassword']); // password Reset Link Send by email
-    // Route::post('/forget-token', [AuthController::class, 'forget_token']);
     Route::post('/reset-password', [AuthController::class, 'resetPassword']);
     Route::get('/verify-email', [AuthController::class, 'verifyEmail'])
     ->middleware('signed')
     ->name('verification.verify');
+
+    Route::post('/contact', [ContactController::class, 'contactFrom']);
+
 });
 
 Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'Api'  ], function(){
