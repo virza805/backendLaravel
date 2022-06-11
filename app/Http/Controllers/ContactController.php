@@ -24,12 +24,12 @@ class ContactController extends Controller
     $contact->name = $request->name;
     $contact->phone = $request->phone;
     $contact->email = $request->email;
-    $contact->message = $request->message .PHP_EOL. ' \n This message has been sent via ';
+    $contact->message = $request->message;
     $contact->save();
 
     // send user & admin message via queue
-    //  ProcessContactMail::dispatch($contact);
-    Mail::send(new ContactMail($contact));
+     ProcessContactMail::dispatch($contact);
+    // Mail::send(new ContactMail($contact));
 
 
     // return redirect(route('single-property', $property_id))->with(['message' => 'Your message has been sent.']);
@@ -41,13 +41,13 @@ class ContactController extends Controller
     }
 
 
-   
+
     // // Show all user in Admin panel
     public function allMessage(Request $request)
     {
         $user_list = Contact::latest()->orderBy('id', 'DESC')->paginate(10);
         return response()->json($user_list, 200);
     }
-    
+
 
 }

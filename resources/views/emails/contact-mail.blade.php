@@ -428,7 +428,7 @@
 
   </head>
   <body>
-    
+
     <span class="preheader">This is an automated reply to let you know that your message has been received.</span>
     <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
       <tr>
@@ -451,7 +451,7 @@
                       <div class="f-fallback">
                         <h2>Hi <strong style="color: green; font-size: 14px;"> {{$contact->name}} !</strong>,</h2>
                         <p>Thanks for contact me. This is an automated reply to let you know that your message has been received.</p>
-                        <p><strong style="color: red; font-size: 14px;">Note</strong>, our standard office hours are 9am to 4pm Banvglades Standard Time (GMT + 6), Monday through Friday.</p>
+                        <p><strong style="color: red; font-size: 14px;">Note</strong>, our standard office hours are 9am to 4pm Banvglades Standard Time (GMT + 6), Saterday through Thuesday.</p>
                         <table class="attributes" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                           <tr>
                             <td class="attributes_content">
@@ -487,8 +487,8 @@
                           </tr>
                         </table>
                         <table class="purchase" width="100%" cellpadding="0" cellspacing="0">
-                          
-                            
+
+
                           <tr>
                             <td colspan="2">
                               <table class="purchase_content" width="100%" cellpadding="0" cellspacing="0">
@@ -498,9 +498,9 @@
                                     <p class="f-fallback">Email: {{$contact->email}}</p>
                                     <p class="f-fallback">Phone: {{$contact->phone}}</p>
                                   </th>
-                                  
+
                                 </tr>
-                                
+
                                 <tr>
                                     <th class="purchase_heading" align="left">
                                         <p class="f-fallback">Message</p>
@@ -509,12 +509,12 @@
                                 <tr>
                                   <td width="100%" class="purchase_item">{{$contact->message}}</td>
                                 </tr>
-                                
+
                               </table>
                             </td>
                           </tr>
                         </table>
-                        <p>If you have any questions about this invoice, simply reply to this email or reach out to our <a href="mailto:virza.bd@gmail.com">support team</a> for help.</p>
+                        <p>If you have any questions about this service, simply reply to this email or reach out to our <a href="mailto:virza.bd@gmail.com">support team</a> for help.</p>
                         <p>Cheers,
                           <br>The vir-za Team</p>
                         <!-- Sub copy -->
@@ -529,10 +529,10 @@
                 <table class="email-footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
                   <tr>
                     <td class="content-cell" align="center">
-                      <p class="f-fallback sub align-center">&copy; 2022 Product Name. All rights reserved.</p>
+                      <p class="f-fallback sub align-center">&copy; 2022 vir-za. All rights reserved.</p>
                       <p class="f-fallback sub align-center">
                         Company vir-za.com
-                        <br>A 63/4 East Rajation, Saver, 
+                        <br>A 63/4 East Rajation, Saver,
                         <br>Dhaka - 1340, Bangladesh.
                       </p>
                     </td>
