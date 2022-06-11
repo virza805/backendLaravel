@@ -35,8 +35,19 @@ class ContactController extends Controller
     // return redirect(route('single-property', $property_id))->with(['message' => 'Your message has been sent.']);
     return response()->json([
         'err_message' => 'Your message has been sent.',
-        'data' => $contact,
+        // 'data' => $contact,
     ], 200);
 
     }
+
+
+   
+    // // Show all user in Admin panel
+    public function allMessage(Request $request)
+    {
+        $user_list = Contact::latest()->orderBy('id', 'DESC')->paginate(10);
+        return response()->json($user_list, 200);
+    }
+    
+
 }

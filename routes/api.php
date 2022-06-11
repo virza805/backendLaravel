@@ -48,6 +48,7 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
     // Route::post('/delete', [AuthController::class, 'delete']); // Note work
 
     // Route::get('/user-list-for-select2', [AuthController::class, 'user_list_for_select2']);
+    Route::get('/messages', [ContactController::class, 'allMessage']);
 
 
 });
