@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\TaskListController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // use Illuminate\Support\Facades\Auth;
@@ -49,6 +50,24 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
 
     // Route::get('/user-list-for-select2', [AuthController::class, 'user_list_for_select2']);
     Route::get('/messages', [ContactController::class, 'allMessage']);
+
+
+
+
+
+
+    Route::get('/', [TaskListController::class, 'task_list']);
+    Route::post('/store', [TaskListController::class, 'store']);
+    Route::post('/update', [TaskListController::class, 'update']);
+
+    Route::post('/success-task', [TaskListController::class, 'success_task']);
+
+    Route::get('/get/{id}', [TaskListController::class, 'get']);
+    Route::post('/delete', [TaskListController::class, 'delete']);
+    Route::post('/delete-multi', [TaskListController::class, 'delete_multi']);
+    // Route::get('/book-list-for-select2', [TaskListController::class, 'book_list_for_select2']);
+
+
 
 
 });
