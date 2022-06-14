@@ -67,7 +67,10 @@ class TaskListController extends Controller
         // $id = Auth::user()->id;
         $task->save();
 
-        return response()->json($task, 200);
+        return response()->json([
+            'err_message' => 'Successfully New Task Added.',
+            'data' => $task,
+        ], 200);
     }
 
     /**

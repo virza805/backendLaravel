@@ -56,13 +56,13 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
 
 
 
-    Route::get('/', [TaskListController::class, 'task_list']);
-    Route::post('/store', [TaskListController::class, 'store']);
+    Route::get('/task-list', [TaskListController::class, 'task_list']); // Read all task by search
+    Route::post('/store', [TaskListController::class, 'store']); // add task
     Route::post('/update', [TaskListController::class, 'update']);
 
     Route::post('/success-task', [TaskListController::class, 'success_task']);
 
-    Route::get('/get/{id}', [TaskListController::class, 'get']);
+    Route::get('/get/{id}', [TaskListController::class, 'get']);  // Read current user task
     Route::post('/delete', [TaskListController::class, 'delete']);
     Route::post('/delete-multi', [TaskListController::class, 'delete_multi']);
     // Route::get('/book-list-for-select2', [TaskListController::class, 'book_list_for_select2']);
