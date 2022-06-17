@@ -49,5 +49,41 @@ class ContactController extends Controller
         return response()->json($user_list, 200);
     }
 
+    /**
+     * Delete the specified resource from storage.
+     *
+     * @param  \App\Models\Contact  $Contact
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Request $request)
+    {
+        $book = Contact::find($request->id);
+
+        // if(file_exists(public_path($book->image))) {
+        //     unlink(public_path($book->image));
+        // }
+        $book->delete();
+        return response()->json('Deleted Done', 200);
+    }
+
+    /**
+     * DeleteMultiple Action the specified resource from storage.
+     *
+     * @param  \App\Models\Contact  $Contact
+     * @return \Illuminate\Http\Response
+     */
+    public function delete_multi(Request $request)
+    {
+        foreach ($request->ids as $id) {
+            $book = Contact::find($id);
+            // if(file_exists(public_path($book->image))) {
+            //     unlink(public_path($book->image));
+            // }
+            $book->delete();
+        }
+        // Contact::whereIn('id', $request->ids)->delete();
+        return response()->json('Deleted Done', 200);
+    }
+
 
 }
