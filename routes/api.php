@@ -58,7 +58,7 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
     Route::group(['prefix' => '/task'], function () {
         Route::get('/task-list', [TaskListController::class, 'task_list']); // Read all task by search & pagination
         Route::post('/store', [TaskListController::class, 'store']); // add task
-        Route::post('/update', [TaskListController::class, 'update']);
+        Route::put('/update/{id}', [TaskListController::class, 'update']);
 
         Route::post('/success-task', [TaskListController::class, 'success_task']);
 

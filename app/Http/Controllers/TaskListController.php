@@ -142,13 +142,13 @@ class TaskListController extends Controller
      */
     // public function update(UpdateTaskListRequest $request, TaskList $taskList)
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'title' => ['required'],
-            'dec' => ['required'],
-            'date' => ['required'],
-            'c_date' => ['required'],
+            // 'dec' => ['required'],
+            // 'date' => ['required'],
+            // 'c_date' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -157,11 +157,15 @@ class TaskListController extends Controller
                 'data' => $validator->errors(),
             ], 422);
         }
+        $updateTask = TaskList::find($id);
 
-        $updateTask = TaskList::find($request->id);
+        $updateTask->title = $request->title;;
+        $updateTask->dec = $request->dec;
+        $updateTask->date = $request->date;
+        $updateTask->c_date = $request->c_date;
+
+
         // $book = TaskList::create($request->except('image'));
-
-        $updateTask->fill($request->except('success_task'));
 
         $updateTask['user_id'] = Auth::user()->id;
         // if ($request->hasFile('image')) {
@@ -169,12 +173,7 @@ class TaskListController extends Controller
         //     $book->save();
         // }
 
-        $updateTask->save();
-
-        // $task = TaskList::create($request->except('success_task'));
-
-        // $task['user_id'] = Auth::user()->id;
-        // $task->save();
+        $updateTask->update();
 
         return response()->json($updateTask, 200);
     }
