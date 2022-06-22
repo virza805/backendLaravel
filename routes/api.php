@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\FooterController;
 use App\Http\Controllers\TaskListController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,7 @@ Route::group(['prefix' => '/user', 'middleware'=>['guest:api'], 'namespace' => '
     ->name('verification.verify');
 
     Route::post('/contact', [ContactController::class, 'contactFrom']);
+    Route::get('/frontend-footer', [FooterController::class, 'frontend_footer']); // Read all footer data in frontend
 
 });
 
@@ -74,6 +76,18 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
         Route::post('/delete-multi', [ContactController::class, 'delete_multi']);
     });
 
+
+// Footer api ( Create, Read, Update, Delete )
+    Route::group(['prefix' => '/footer'], function () {
+
+        Route::get('/backend-footer-list', [FooterController::class, 'backend_footer_list']); // Read all footer data
+        Route::post('/store', [FooterController::class, 'store']); // add footer data
+        Route::get('/get/{id}', [FooterController::class, 'get']);  // Read current user footer data
+
+        Route::put('/update/{id}', [FooterController::class, 'update']);
+        Route::post('/delete', [FooterController::class, 'delete']);
+
+    });
 
 });
 
