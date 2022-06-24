@@ -24,7 +24,7 @@ class FooterController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'dec' => ['required'],
-            // 'copy_right' => ['required'],
+            'copy_right' => ['required'],
             // 'phone' => ['required'],
             // 'logo' => ['required'],
             // 'email' => ['required'],
@@ -55,23 +55,35 @@ class FooterController extends Controller
         // }
 
         if(!empty($request->logo)) {
-
-            // if (file_exists(public_path($request->logo->getClientOriginalName())) ) {
-            //     $logo_name = 1 . '-' . $request->logo->getClientOriginalName();
-            // }
+/* Try to function check
+            $logo_name = $request->logo->getClientOriginalName();
 
             // foreach ($request->ids as $id) {
-            //     $book = Footer::find($id);
-            //     if(file_exists(public_path($book->logo))) {
-            //         $logo_name = 1 . '-' . $request->logo->getClientOriginalName();
-            //     } else{
-            //         $logo_name = $request->logo->getClientOriginalName();
-            //     }
-
+                $book = Footer::find($request->logo);
+                if(file_exists(public_path('public/uploads', $logo_name))) {
+                    $logo_names = time() . '-' . $request->logo->getClientOriginalName();
+                } else{
+                    $logo_names = $request->logo->getClientOriginalName();
+                }
             // }
+ */
+/*
+Try to Query check
+            // $check_img = DB::table('users')->where('name', 'John')->first();
 
+            // echo $check_img->logo;
+            // $get_same_image_name = $check_img->logo;
 
-            $logo_name = time() . '-' . $request->logo->getClientOriginalName();
+            $check_img = Footer::where('logo', $logo_name)->get();
+            if ($check_img->logo == $logo_name) {
+                $logo_names = time() . '-' . $request->logo->getClientOriginalName();
+            } else {
+                $logo_names = $request->logo->getClientOriginalName(); $request->file('logo')
+            }
+*/
+            $file = $request->file('logo');
+            // $logo_name =  uniqid() . $file->getClientOriginalName() . '.' . $file->getClientOriginalExtension();
+            $logo_name = time() . '-' . $file->getClientOriginalName();
             // store the file
             $request->logo->storeAs('public/uploads', $logo_name);
 
@@ -189,10 +201,10 @@ class FooterController extends Controller
 
 
         // foreach ($request->ids as $id) {
-        //     $book = BookList::find($id);
-        //     if(file_exists(public_path($book->image))) {
-        //         unlink(public_path($book->image));
-        //     }
+            // $book = Footer::find($id);
+            if(file_exists(public_path($book->logo))) {
+                unlink(public_path($book->logo));
+            }
         //     $book->delete();
         // }
 

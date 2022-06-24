@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Jobs\ProcessContactMail;
 use App\Models\Contact;
 use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -13,12 +14,28 @@ class ContactController extends Controller
 {
     public function contactFrom(Request $request)
     {
-    $request->validate([
-        'name' => 'required|max:255',
-        'phone' => 'required|max:255',
-        'email' => 'required|email|max:255',
-        'message' => 'required|max:255',
+    // $request->validate([
+    //     'name' => 'required',
+    //     'phone' => 'required',
+    //     'email' => 'required|email',
+    //     'message' => 'required|max:255',
+    // ]);
+
+    $validator = Validator::make($request->all(), [
+        'name' => ['required'],
+        'phone' => ['required'],
+        'email' => ['required', 'email'],
+        'message' => ['required'],
     ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'err_message' => 'validation error',
+            'data' => $validator->errors(),
+        ], 422);
+    }
+
+
 
     $contact = new Contact();
     $contact->name = $request->name;
@@ -35,7 +52,7 @@ class ContactController extends Controller
     // return redirect(route('single-property', $property_id))->with(['message' => 'Your message has been sent.']);
     return response()->json([
         'err_message' => 'Your message has been sent.',
-        // 'data' => $contact,
+        'data' => $contact,
     ], 200);
 
     }
