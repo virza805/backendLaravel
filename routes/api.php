@@ -94,3 +94,10 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
 Route::get('/test', function() {
     return "heyyy this is a very secret router";
 })->middleware('auth:api','verified');
+
+
+// Show this route for all user ( Login without Login )
+
+Route::group(['prefix' => '/all' ], function() {
+    Route::get('/client-footer', [FooterController::class, 'frontend_footer']); // Read all footer data in frontend
+});

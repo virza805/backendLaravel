@@ -122,7 +122,8 @@ Try to Query check
     public function frontend_footer()
     {
         $status = 1;
-        $footer_data = Footer::where('status', $status)->orderBy('id', 'DESC')->get();
+        // $footer_data = Footer::where('status', $status)->orderBy('id', 'DESC')->get(); // Show all data in database
+        $footer_data = Footer::where('status', $status)->orderBy('id', 'DESC')->get()->first(); // Show only last data 
 
         return response()->json([
             'err_message' => 'Show footer data',
@@ -155,10 +156,9 @@ Try to Query check
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'title' => ['required'],
-            // 'dec' => ['required'],
-            // 'date' => ['required'],
-            // 'c_date' => ['required'],
+            'dec' => ['required'],
+            // 'copy_right' => ['required'],
+            // 'phone' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -169,10 +169,17 @@ Try to Query check
         }
         $updateTask = Footer::find($id);
 
-        $updateTask->title = $request->title;;
+        $updateTask->copy_right = $request->copy_right;;
         $updateTask->dec = $request->dec;
-        $updateTask->date = $request->date;
-        $updateTask->c_date = $request->c_date;
+        $updateTask->phone = $request->phone;
+        $updateTask->email = $request->email;
+        $updateTask->address = $request->address;
+        $updateTask->fb = $request->fb;
+        $updateTask->instagram = $request->instagram;
+        $updateTask->linkedin = $request->linkedin;
+        $updateTask->twitter = $request->twitter;
+        $updateTask->github = $request->github;
+        $updateTask->web = $request->web;
 
 
         // $book = Footer::create($request->except('image'));
@@ -198,18 +205,9 @@ Try to Query check
     {
         $book = Footer::find($request->id);
 
-
-
-        // foreach ($request->ids as $id) {
-            // $book = Footer::find($id);
-            if(file_exists(public_path($book->logo))) {
-                unlink(public_path($book->logo));
-            }
-        //     $book->delete();
-        // }
-
-
-
+            // if(file_exists(public_path($book->logo))) {
+            //     unlink(public_path($book->logo));
+            // }
 
         $book->delete();
         return response()->json('Deleted Done', 200);
