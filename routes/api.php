@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\FooterTopController;
+use App\Http\Controllers\SliderController;
+use App\Http\Controllers\SubCategoriesController;
 use App\Http\Controllers\TaskListController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -90,7 +93,7 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
 
     });
 // Footer Top & Opening Houre api ( Create, Read, Update, Delete )
-    Route::group(['prefix' => '/footer'], function () {
+    Route::group(['prefix' => '/footer-top'], function () {
 
         Route::get('/backend-footer-list', [FooterTopController::class, 'backend_footer_list']); // Read all footer data
         Route::post('/store', [FooterTopController::class, 'store']); // add footer data
@@ -101,6 +104,46 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
 
     });
 
+// Categories api ( Create, Read, Update, Delete )
+    Route::group(['prefix' => '/cat'], function () {
+
+        Route::get('/backend-cat-list', [CategoriesController::class, 'backendShowList']); // Read all Categories data by user
+        Route::post('/store', [CategoriesController::class, 'store']); // add Categories data
+        Route::get('/get/{id}', [CategoriesController::class, 'get']);  // Read current user Categories data
+
+        Route::put('/update/{id}', [CategoriesController::class, 'update']);
+        Route::post('/delete', [CategoriesController::class, 'delete']);
+
+    });
+
+// Sub Categories api ( Create, Read, Update, Delete )
+    Route::group(['prefix' => '/sub-cat'], function () {
+
+        Route::get('/backend-sub-cat-list', [SubCategoriesController::class, 'backendShowList']); // Read all Categories data by user
+        Route::post('/store', [SubCategoriesController::class, 'store']); // add Categories data
+        Route::get('/get/{id}', [SubCategoriesController::class, 'get']);  // Read current user Categories data
+
+        Route::put('/update/{id}', [SubCategoriesController::class, 'update']);
+        Route::post('/delete', [SubCategoriesController::class, 'delete']);
+
+    });
+
+// Slider & Buy 1 Get 1 api ( Create, Read, Update, Delete )
+    Route::group(['prefix' => '/slider'], function () {
+
+        Route::get('/backend-slider-list', [SliderController::class, 'backendShowList']); // Read all Categories data by user
+        Route::post('/store', [SliderController::class, 'store']); // add Categories data
+        Route::get('/get/{id}', [SliderController::class, 'get']);  // Read current user Categories data
+
+        Route::put('/update/{id}', [SliderController::class, 'update']);
+        Route::post('/delete', [SliderController::class, 'delete']);
+
+    });
+
+
+
+
+
 });
 
 Route::get('/test', function() {
@@ -108,10 +151,12 @@ Route::get('/test', function() {
 })->middleware('auth:api','verified');
 
 
-// Show this route for all user ( Login without Login )
+// Show this route for all user ( Login Or without Login )
 
 Route::group(['prefix' => '/all' ], function() {
     Route::get('/client-footer', [FooterController::class, 'frontend_footer']); // Read all footer data in frontend
     Route::get('/client-footer-top', [FooterTopController::class, 'frontend_footer']); // Read 1st 4 footer data in frontend
     Route::get('/client-footer-open-time', [FooterTopController::class, 'frontend_footer_open_time']); // Read last 4 footer data in frontend
+    Route::get('/client-categories', [CategoriesController::class, 'frontendShow']); // Read last 4 footer data in frontend
+    Route::get('/client-slider', [SliderController::class, 'frontendShow']); // Read last 4 footer data in frontend
 });

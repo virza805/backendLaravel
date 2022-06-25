@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\FooterTop;
+use App\Models\SubCategories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
-class FooterTopController extends Controller
+class SubCategoriesController extends Controller
 {
 
     /**
@@ -23,9 +23,9 @@ class FooterTopController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'dec' => ['required'],
-            'title' => ['required'],
-            // 'icon_img' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'name' => ['required'],
+            'slug' => ['required'],
+            // 'category_id' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -35,23 +35,13 @@ class FooterTopController extends Controller
             ], 422);
         }
 
-        $book = FooterTop::create($request->except('icon_img'));
+        $book = SubCategories::create();
         $book['user_id'] = Auth::user()->id;
-
-        if(!empty($request->icon_img)) {
-            $file = $request->file('icon_img');
-            // $icon_img_name =  uniqid() . $file->getClientOriginalName() . '.' . $file->getClientOriginalExtension();
-            $icon_img_name = time() . '-' . $file->getClientOriginalName();
-            // store the file
-            $request->icon_img->storeAs('public/uploads', $icon_img_name);
-
-            $book->icon_img = $icon_img_name;
-        }
 
         $book->save();
 
         return response()->json([
-            'err_message' => 'Successfully insert footer Top data',
+            'err_message' => 'Successfully insert sub Categories',
             'data' => $book,
         ], 200);
     }
@@ -62,11 +52,11 @@ class FooterTopController extends Controller
      * @param  \App\Models\Footer  $Footer
      * @return \Illuminate\Http\Response
      */
-    public function backend_footer_list()
+    public function backendShowList()
     {
         $user_id = Auth::user()->id;
 
-        $task_list = FooterTop::where('user_id', $user_id)->orderBy('id', 'DESC')->paginate(5);
+        $task_list = SubCategories::where('user_id', $user_id)->orderBy('id', 'DESC')->paginate(5);
 
         return response()->json($task_list, 200);
     }
@@ -77,30 +67,14 @@ class FooterTopController extends Controller
      * @param  \App\Models\Footer  $Footer
      * @return \Illuminate\Http\Response
      */
-    public function frontend_footer()
+    public function frontendShow()
     {
         $status = 1;
         // $footer_data = Footer::where('status', $status)->orderBy('id', 'DESC')->get(); // Show all data in database
-        $footer_data = FooterTop::where('status', $status)->orderBy('id', 'DESC')->paginate(4); // Show only last data
+        $footer_data = SubCategories::where('status', $status)->orderBy('id', 'DESC')->get(); // Show only last data
 
         return response()->json([
-            'err_message' => 'Show footer data',
-            'data' => $footer_data,
-        ], 200);
-    }
-    /**
-     * Display the specified resource.
-     *Opening Hours
-     * @param  \App\Models\Footer  $Footer
-     * @return \Illuminate\Http\Response
-     */
-    public function frontend_footer_open_time()
-    {
-        $status = 1;
-        $footer_data = FooterTop::where('status', $status)->orderBy('id', 'ASC')->paginate(4); // Show only last data
-
-        return response()->json([
-            'err_message' => 'Show footer data',
+            'err_message' => 'Show sub Categories data',
             'data' => $footer_data,
         ], 200);
     }
@@ -113,7 +87,7 @@ class FooterTopController extends Controller
      */
     public function get($id)
     {
-        $book = FooterTop::find($id);
+        $book = SubCategories::find($id);
 
         return response()->json($book, 200);
     }
@@ -130,9 +104,9 @@ class FooterTopController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'dec' => ['required'],
-            'title' => ['required'],
-            // 'icon_img' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'name' => ['required'],
+            'slug' => ['required'],
+            // 'category_id' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -141,21 +115,14 @@ class FooterTopController extends Controller
                 'data' => $validator->errors(),
             ], 422);
         }
-        $updateTask = FooterTop::find($id);
+        $updateTask = SubCategories::find($id);
 
-        $updateTask->title = $request->title;;
-        $updateTask->dec = $request->dec;
-        $updateTask->icon_img = $request->icon_img;
+        $updateTask->slug = $request->slug;;
+        $updateTask->name = $request->name;
+        $updateTask->category_id = $request->category_id;
 
-
-        // $book = Footer::create($request->except('icon_img'));
 
         $updateTask['user_id'] = Auth::user()->id;
-        // if ($request->hasFile('icon_img')) {
-        //     $book->icon_img = Storage::put('upload/books', $request->file('icon_img'));
-        //     $book->save();
-        // }
-
         $updateTask->update();
 
         return response()->json($updateTask, 200);
@@ -169,15 +136,10 @@ class FooterTopController extends Controller
      */
     public function delete(Request $request)
     {
-        $book = FooterTop::find($request->id);
-
-            // if(file_exists(public_path($book->icon_img))) {
-            //     unlink(public_path($book->icon_img));
-            // }
-
+        $book = SubCategories::find($request->id);
         $book->delete();
+
         return response()->json('Deleted Done', 200);
     }
 
 }
-

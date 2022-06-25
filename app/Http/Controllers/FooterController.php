@@ -123,7 +123,7 @@ Try to Query check
     {
         $status = 1;
         // $footer_data = Footer::where('status', $status)->orderBy('id', 'DESC')->get(); // Show all data in database
-        $footer_data = Footer::where('status', $status)->orderBy('id', 'DESC')->get()->first(); // Show only last data 
+        $footer_data = Footer::where('status', $status)->orderBy('id', 'DESC')->get()->first(); // Show only last data
 
         return response()->json([
             'err_message' => 'Show footer data',
@@ -205,9 +205,15 @@ Try to Query check
     {
         $book = Footer::find($request->id);
 
+
+        // foreach ($request->ids as $id) {
+            // $book = Footer::find($id);
             // if(file_exists(public_path($book->logo))) {
             //     unlink(public_path($book->logo));
             // }
+        //     $book->delete();
+        // }
+
 
         $book->delete();
         return response()->json('Deleted Done', 200);
