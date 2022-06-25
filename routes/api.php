@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FooterController;
+use App\Http\Controllers\FooterTopController;
 use App\Http\Controllers\TaskListController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -88,6 +89,17 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
         Route::post('/delete', [FooterController::class, 'delete']);
 
     });
+// Footer Top & Opening Houre api ( Create, Read, Update, Delete )
+    Route::group(['prefix' => '/footer'], function () {
+
+        Route::get('/backend-footer-list', [FooterTopController::class, 'backend_footer_list']); // Read all footer data
+        Route::post('/store', [FooterTopController::class, 'store']); // add footer data
+        Route::get('/get/{id}', [FooterTopController::class, 'get']);  // Read current user footer data
+
+        Route::put('/update/{id}', [FooterTopController::class, 'update']);
+        Route::post('/delete', [FooterTopController::class, 'delete']);
+
+    });
 
 });
 
@@ -100,4 +112,6 @@ Route::get('/test', function() {
 
 Route::group(['prefix' => '/all' ], function() {
     Route::get('/client-footer', [FooterController::class, 'frontend_footer']); // Read all footer data in frontend
+    Route::get('/client-footer-top', [FooterTopController::class, 'frontend_footer']); // Read 1st 4 footer data in frontend
+    Route::get('/client-footer-open-time', [FooterTopController::class, 'frontend_footer_open_time']); // Read last 4 footer data in frontend
 });
