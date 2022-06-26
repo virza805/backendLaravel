@@ -51,7 +51,7 @@ class CategoriesController extends Controller
         $book->save();
 
         return response()->json([
-            'err_message' => 'Successfully insert footer Top data',
+            'err_message' => 'Successfully insert Categories',
             'data' => $book,
         ], 200);
     }
@@ -115,7 +115,7 @@ class CategoriesController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required'],
-            'slug' => ['required'],
+            // 'slug' => ['required'],
             // 'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 

@@ -63,7 +63,7 @@ class SliderController extends Controller
      * @param  \App\Models\Footer  $Footer
      * @return \Illuminate\Http\Response
      */
-    public function backend_footer_list()
+    public function backendShowList()
     {
         $user_id = Auth::user()->id;
 
@@ -78,11 +78,11 @@ class SliderController extends Controller
      * @param  \App\Models\Footer  $Footer
      * @return \Illuminate\Http\Response
      */
-    public function frontend_footer()
+    public function frontendShow()
     {
         $status = 1;
         // $footer_data = Footer::where('status', $status)->orderBy('id', 'DESC')->get(); // Show all data in database
-        $footer_data = Slider::where('status', $status)->orderBy('id', 'DESC')->paginate(4); // Show only last data
+        $footer_data = Slider::where('status', $status)->orderBy('id', 'DESC')->get(); // Show only last data
 
         return response()->json([
             'err_message' => 'Show footer data',
@@ -95,10 +95,10 @@ class SliderController extends Controller
      * @param  \App\Models\Footer  $Footer
      * @return \Illuminate\Http\Response
      */
-    public function frontend_footer_open_time()
+    public function buyOneGetOne()
     {
-        $status = 1;
-        $footer_data = Slider::where('status', $status)->orderBy('id', 'ASC')->paginate(4); // Show only last data
+        $use = 1;
+        $footer_data = Slider::where('use', $use)->orderBy('id', 'ASC')->paginate(4); // Show only last data
 
         return response()->json([
             'err_message' => 'Show footer data',
@@ -135,6 +135,7 @@ class SliderController extends Controller
             'title' => ['required'],
             'sub' => ['required'],
             // 'use' => ['required'],
+            // 'des' => ['required'],
             // 'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
