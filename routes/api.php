@@ -114,6 +114,9 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
         Route::put('/update/{id}', [CategoriesController::class, 'update']);
         Route::post('/delete', [CategoriesController::class, 'delete']);
 
+        // Route::post('/delete-multi', [CategoriesController::class, 'delete_multi']);
+        // Route::post('/success-task', [CategoriesController::class, 'success_task']);
+
     });
 
 // Sub Categories api ( Create, Read, Update, Delete )
@@ -137,6 +140,9 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
 
         Route::put('/update/{id}', [SliderController::class, 'update']);
         Route::post('/delete', [SliderController::class, 'delete']);
+
+        Route::post('/delete-multi', [SliderController::class, 'delete_multi']);
+        Route::post('/add-buy-get', [SliderController::class, 'use']);
 
     });
 

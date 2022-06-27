@@ -198,4 +198,25 @@ class SliderController extends Controller
         return response()->json('Deleted Done', 200);
     }
 
+    /**
+     * DeleteMulti Action the specified resource from storage.
+     *
+     * @param  \App\Models\Slider  $Slider
+     * @return \Illuminate\Http\Response
+     */
+    public function delete_multi(Request $request)
+    {
+        foreach ($request->ids as $id) {
+            $book = Slider::find($id);
+            // if(file_exists(public_path($book->image))) {
+            //     unlink(public_path($book->image));
+            // }
+            $book->delete();
+        }
+
+        // Slider::whereIn('id', $request->ids)->delete();
+        return response()->json('Selected all data delete Done', 200);
+    }
+
+
 }

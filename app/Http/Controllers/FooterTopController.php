@@ -66,7 +66,7 @@ class FooterTopController extends Controller
     {
         $user_id = Auth::user()->id;
 
-        $task_list = FooterTop::where('user_id', $user_id)->orderBy('id', 'DESC')->paginate(5);
+        $task_list = FooterTop::where('user_id', $user_id)->orderBy('id', 'DESC')->paginate(20);
 
         return response()->json($task_list, 200);
     }
@@ -97,7 +97,7 @@ class FooterTopController extends Controller
     public function frontend_footer_open_time()
     {
         $status = 1;
-        $footer_data = FooterTop::where('status', $status)->orderBy('id', 'ASC')->paginate(4); // Show only last data
+        $footer_data = FooterTop::where('status', $status)->orderBy('id', 'ASC')->paginate(3); // Show only last data
 
         return response()->json([
             'err_message' => 'Show footer data',
