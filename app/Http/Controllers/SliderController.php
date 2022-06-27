@@ -80,9 +80,9 @@ class SliderController extends Controller
      */
     public function frontendShow()
     {
-        $status = 1;
+        $status = 0;
         // $footer_data = Footer::where('status', $status)->orderBy('id', 'DESC')->get(); // Show all data in database
-        $footer_data = Slider::where('status', $status)->orderBy('id', 'DESC')->get(); // Show only last data
+        $footer_data = Slider::where('use', $status)->orderBy('id', 'DESC')->get(); // Show only last data
 
         return response()->json([
             'err_message' => 'Show footer data',
@@ -98,7 +98,8 @@ class SliderController extends Controller
     public function buyOneGetOne()
     {
         $use = 1;
-        $footer_data = Slider::where('use', $use)->orderBy('id', 'ASC')->paginate(4); // Show only last data
+        $footer_data = Slider::where('use', $use)->orderBy('id', 'ASC')->get(); // Show only last data
+        // $footer_data = Slider::where('use', $use)->orderBy('id', 'ASC')->paginate(4); // Show only last data
 
         return response()->json([
             'err_message' => 'Show footer data',
