@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Categories extends Model
+class Product extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    public function products(): HasMany
+
+    public function category(): BelongsTo
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(Categories::class);
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class CategoriesController extends Controller
 {
@@ -24,7 +25,7 @@ class CategoriesController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required'],
-            'slug' => ['required'],
+            // 'slug' => ['required'],
             // 'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
@@ -145,6 +146,27 @@ class CategoriesController extends Controller
         return response()->json($updateTask, 200);
     }
 
+
+    public function use(Request $request)
+    {
+        Categories::where('id',$request->id)->update([
+            'slug' => 1,
+            'updated_at' => Carbon::now()->toDateTimeString()
+        ]);
+        return response()->json('Success', 200);
+    }
+
+    public function un_use(Request $request)
+    {
+        Categories::where('id',$request->id)->update([
+            'slug' => 0,
+            'updated_at' => Carbon::now()->toDateTimeString()
+        ]);
+        return response()->json('Set Categories again Success', 200);
+    }
+
+
+
      /**
      * Delete the specified resource from storage.
      *
@@ -162,5 +184,27 @@ class CategoriesController extends Controller
         $book->delete();
         return response()->json('Deleted Done', 200);
     }
+
+
+    /**
+     * DeleteMulti Action the specified resource from storage.
+     *
+     * @param  \App\Models\Categories  $Categories
+     * @return \Illuminate\Http\Response
+     */
+    public function delete_multi(Request $request)
+    {
+        foreach ($request->ids as $id) {
+            $book = Categories::find($id);
+            // if(file_exists(public_path($book->image))) {
+            //     unlink(public_path($book->image));
+            // }
+            $book->delete();
+        }
+
+        // Categories::whereIn('id', $request->ids)->delete();
+        return response()->json('Selected all data delete Done', 200);
+    }
+
 
 }

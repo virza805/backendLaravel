@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\FooterTopController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SubCategoriesController;
 use App\Http\Controllers\TaskListController;
@@ -114,8 +115,9 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
         Route::put('/update/{id}', [CategoriesController::class, 'update']);
         Route::post('/delete', [CategoriesController::class, 'delete']);
 
-        // Route::post('/delete-multi', [CategoriesController::class, 'delete_multi']);
-        // Route::post('/success-task', [CategoriesController::class, 'success_task']);
+        Route::post('/delete-multi', [CategoriesController::class, 'delete_multi']);
+        Route::post('/add-buy-get', [CategoriesController::class, 'use']);
+        Route::post('/remove-buy-get', [CategoriesController::class, 'un_use']);
 
     });
 
@@ -143,6 +145,23 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
 
         Route::post('/delete-multi', [SliderController::class, 'delete_multi']);
         Route::post('/add-buy-get', [SliderController::class, 'use']);
+        Route::post('/remove-buy-get', [SliderController::class, 'un_use']);
+
+    });
+
+// Product ( Create, Read, Update, Delete )
+    Route::group(['prefix' => '/product'], function () {
+
+        Route::get('/backend-product-list', [ProductController::class, 'backendShowList']); // Read all Categories data by user
+        Route::post('/store', [ProductController::class, 'store']); // add Categories data
+        Route::get('/get/{id}', [ProductController::class, 'get']);  // Read current user Categories data
+
+        Route::put('/update/{id}', [ProductController::class, 'update']);
+        Route::post('/delete', [ProductController::class, 'delete']);
+
+        Route::post('/delete-multi', [ProductController::class, 'delete_multi']);
+        Route::post('/add-buy-get', [ProductController::class, 'use']);
+        Route::post('/remove-buy-get', [ProductController::class, 'un_use']);
 
     });
 
@@ -167,4 +186,5 @@ Route::group(['prefix' => '/all' ], function() {
     Route::get('/client-sub-categories', [SubCategoriesController::class, 'frontendShow']); // Read Sub Categories data in frontend
     Route::get('/client-slider', [SliderController::class, 'frontendShow']); // Read all slider data in frontend
     Route::get('/client-buy-get', [SliderController::class, 'buyOneGetOne']); // Read all slider->use data in frontend
+    Route::get('/client-product', [ProductController::class, 'frontendShow']); // Read all slider->use data in frontend
 });
