@@ -183,8 +183,13 @@ Route::group(['prefix' => '/all' ], function() {
     Route::get('/client-footer-top', [FooterTopController::class, 'frontend_footer']); // Read 1st 4 footer data in frontend
     Route::get('/client-footer-open-time', [FooterTopController::class, 'frontend_footer_open_time']); // Read last 4 footer data in frontend
     Route::get('/client-categories', [CategoriesController::class, 'frontendShow']); // Read Categories data in frontend
+
+
+
+
     Route::get('/client-sub-categories', [SubCategoriesController::class, 'frontendShow']); // Read Sub Categories data in frontend
     Route::get('/client-slider', [SliderController::class, 'frontendShow']); // Read all slider data in frontend
     Route::get('/client-buy-get', [SliderController::class, 'buyOneGetOne']); // Read all slider->use data in frontend
     Route::get('/client-product', [ProductController::class, 'frontendShow']); // Read all slider->use data in frontend
+    Route::get('/client-cat-product/{id}', [ProductController::class, 'frontendShowCatP']); // Read Categories data in frontend
 });

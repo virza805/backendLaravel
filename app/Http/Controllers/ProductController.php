@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categories;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -83,6 +84,24 @@ class ProductController extends Controller
         $stock = 1;
         // $product_data = product::where('status', $status)->orderBy('id', 'DESC')->get(); // Show all data in database
         $product_data = Product::where('stock', $stock)->orderBy('id', 'DESC')->paginate(5); // Show only last data
+
+        return response()->json([
+            'err_message' => 'Show product data',
+            'data' => $product_data,
+        ], 200);
+    }
+
+    /**
+     * Display the specified resource.
+     *product $product
+     * @param  \App\Models\product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function frontendShowCatP($id)
+    {
+        $stock = Categories::find($id);
+        // $product_data = product::where('status', $status)->orderBy('id', 'DESC')->get(); // Show all data in database
+        $product_data = Product::where('category_id', $stock)->orderBy('id', 'DESC')->paginate(5); // Show only last data
 
         return response()->json([
             'err_message' => 'Show product data',
