@@ -99,9 +99,10 @@ class ProductController extends Controller
      */
     public function frontendShowCatP($id)
     {
-        $stock = Categories::find($id);
+        // $stock = Categories::find('', $id);
+        // $stock = Categories::find($id);
         // $product_data = product::where('status', $status)->orderBy('id', 'DESC')->get(); // Show all data in database
-        $product_data = Product::where('category_id', $stock)->orderBy('id', 'DESC')->paginate(5); // Show only last data
+        $product_data = Product::where('category_id', $id)->orderBy('id', 'DESC')->paginate(5); // Show only last data
 
         return response()->json([
             'err_message' => 'Show product data',
