@@ -85,7 +85,24 @@ class CategoriesController extends Controller
         $footer_data = Categories::where('status', $status)->orderBy('id', 'DESC')->get(); // Show only last data
 
         return response()->json([
-            'err_message' => 'Show footer data',
+            'err_message' => 'Show Category data',
+            'data' => $footer_data,
+        ], 200);
+    }
+    /**
+     * Display the specified resource.
+     *Footer $Footer
+     * @param  \App\Models\Footer  $Footer
+     * @return \Illuminate\Http\Response
+     */
+    public function frontendShowBeforeFooter()
+    {
+        $status = 0;
+        // $footer_data = Footer::where('status', $status)->orderBy('id', 'DESC')->get(); // Show all data in database
+        $footer_data = Categories::where('slug', $status)->orderBy('id', 'DESC')->get(); // Show only last data
+
+        return response()->json([
+            'err_message' => 'Show before footer Category data',
             'data' => $footer_data,
         ], 200);
     }
@@ -155,16 +172,6 @@ class CategoriesController extends Controller
         ]);
         return response()->json('Success', 200);
     }
-
-    public function un_use(Request $request)
-    {
-        Categories::where('id',$request->id)->update([
-            'slug' => 0,
-            'updated_at' => Carbon::now()->toDateTimeString()
-        ]);
-        return response()->json('Set Categories again Success', 200);
-    }
-
 
 
      /**
