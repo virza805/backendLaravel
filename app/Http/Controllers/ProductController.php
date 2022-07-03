@@ -18,7 +18,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreBookListRequest  $request
+     * @param  \App\Http\Requests\StoreProductRequest  $request
      * @return \Illuminate\Http\Response
      */
 
@@ -81,9 +81,45 @@ class ProductController extends Controller
      */
     public function frontendShow()
     {
-        $stock = 1;
-        // $product_data = product::where('status', $status)->orderBy('id', 'DESC')->get(); // Show all data in database
-        $product_data = Product::where('status', $stock)->orderBy('id', 'DESC')->paginate(4); // Show only last data
+
+        if (request()->has('key') && strlen(request()->has('key')) > 0) {
+            $key = request()->key;
+
+            if (Product::where('status', 1)->where('id', $key)->exists()) {
+                $product_data = Product::where('status', 1)
+                    ->orderBy('id', 'DESC')
+                    ->where('id', $key)->paginate(8);
+            } else if (Product::where('status', 1)->where('name', $key)->exists()) {
+                $product_data = Product::where('status', 1)
+                    ->orderBy('id', 'DESC')
+                    ->where('name', $key)->paginate(8);
+            } else if (Product::where('status', 1)->where('description', $key)->exists()) {
+                $product_data = Product::where('status', 1)
+                    ->orderBy('id', 'DESC')
+                    ->where('description', $key)->paginate(8);
+            } else if (Product::where('status', 1)->where('name', 'LIKE', '%' . $key . '%')->exists()) {
+                $product_data = Product::where('status', 1)
+                    ->where('name', 'LIKE', '%' . $key . '%')
+                    ->orderBy('id', 'DESC')
+                    ->paginate(8);
+            } else if (Product::where('status', 1)->where('description', 'LIKE', '%' . $key . '%')->exists()) {
+                $product_data = Product::where('status', 1)
+                    ->where('description', 'LIKE', '%' . $key . '%')
+                    ->orderBy('id', 'DESC')
+                    ->paginate(8);
+            }
+            else {
+                $product_data = Product::where('status', 1)
+                    ->where('section', 'LIKE', '%' . $key . '%')
+                    ->orderBy('id', 'DESC')
+                    ->paginate(8);
+            }
+        }else{
+            $product_data = Product::where('status', 1)->orderBy('id', 'DESC')->paginate(8);
+        }
+
+        // $stock = 1;
+        // $product_data = Product::where('status', $stock)->orderBy('id', 'DESC')->paginate(4); // Show only last data
 
         return response()->json([
             'err_message' => 'Show product data',
