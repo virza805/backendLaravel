@@ -193,4 +193,5 @@ Route::group(['prefix' => '/all' ], function() {
     Route::get('/client-buy-get', [SliderController::class, 'buyOneGetOne']); // Read all slider->use data in frontend
     Route::get('/client-product', [ProductController::class, 'frontendShow']); // Read all slider->use data in frontend
     Route::get('/client-cat-product/{id}', [ProductController::class, 'frontendShowCatP']); // Read Categories ways product data Show in frontend
+    Route::get('/client-product-detail/{id}', [ProductController::class, 'get']);  // Read current user Categories data
 });
