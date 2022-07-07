@@ -101,32 +101,54 @@ class AuthController extends Controller
     */
 
 
-    public function update_profile(Request $request)
+    public function update(Request $request, $id)
     {
-        $user = auth('api')->user();
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => ['required', 'unique:users', 'email', $user->id],
-            'password' => ['min:8', 'sometimes', 'nullable'],
-            'role' => ['sometimes', 'required'],
+        // $user = auth('api')->user();
+        // $this->validate($request, [
+        //     'name' => 'required',
+        //     'email' => ['required','email'],
+        //     // 'password' => ['min:8', 'sometimes', 'nullable'],
+        //     // 'password' => ['min:8'],
+        //     // 'role' => ['sometimes', 'required'],
+        // ]);
+        $validator = Validator::make($request->all(), [
+            'name' => ['required'],
+            // 'email' => ['required','email'],
+            // 'password' => ['min:8', 'sometimes', 'nullable'],
+            // 'role' => ['sometimes', 'required'],
         ]);
 
-        // $user->update([
-        //     'name' => $request->name,
-        //     'email' => $request->email,
-        //     'role' => $request->role,
-        // ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'err_message' => 'validation error',
+                'data' => $validator->errors(),
+            ], 422);
+        }
+
+        $updateUser = User::find($id);
+
+        $updateUser->name = $request->name;;
+        $updateUser->email = $request->email;
+        $updateUser->role = $request->role;
+        $updateUser->password = bcrypt($request->password);
 
         // if($request->password) {
-        //     $user->update([
+        //     $updateUser->update([
         //     'password' => bcrypt($request->password),
         //     ]);
         // }
+        // $book = UserList::create($request->except('image'));
 
-        return response()->json([
-            'success' => true,
-            'user' => $user
-        ], 200);
+        // $updateUser['user_id'] = Auth::user()->id;
+
+        // if ($request->hasFile('image')) {
+        //     $book->image = Storage::put('upload/books', $request->file('image'));
+        //     $book->save();
+        // }
+
+        $updateUser->update();
+
+        return response()->json($updateUser, 200);
     }
     // public function update_profile(Request $request) {
     //     $validator = Validator::make($request->all(), [
