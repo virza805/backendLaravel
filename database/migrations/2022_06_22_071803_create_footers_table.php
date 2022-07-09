@@ -17,7 +17,7 @@ class CreateFootersTable extends Migration
             $table->id();
             $table->integer('user_id')->nullable();
             $table->string('logo', 300)->nullable();
-            $table->string('dec', 700)->nullable();
+            $table->text('description')->nullable();
             $table->string('copy_right', 250)->nullable();
             $table->string('phone', 100)->nullable();
             $table->string('email', 100)->nullable();

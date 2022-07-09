@@ -18,7 +18,7 @@ class CreateFooterTopsTable extends Migration
             $table->integer('user_id')->nullable();
             $table->string('icon_img', 300)->nullable();
             $table->string('title', 250)->nullable();
-            $table->string('dec', 250)->nullable();
+            $table->text('description')->nullable();
 
             $table->string('creator', 250)->nullable();
             $table->integer('status')->default(1);
