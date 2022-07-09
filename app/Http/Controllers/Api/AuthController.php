@@ -103,14 +103,6 @@ class AuthController extends Controller
 
     public function update(Request $request, $id)
     {
-        // $user = auth('api')->user();
-        // $this->validate($request, [
-        //     'name' => 'required',
-        //     'email' => ['required','email'],
-        //     // 'password' => ['min:8', 'sometimes', 'nullable'],
-        //     // 'password' => ['min:8'],
-        //     // 'role' => ['sometimes', 'required'],
-        // ]);
         $validator = Validator::make($request->all(), [
             // 'name' => ['required'],
             'email' => ['required','email'],
