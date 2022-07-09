@@ -112,8 +112,8 @@ class AuthController extends Controller
         //     // 'role' => ['sometimes', 'required'],
         // ]);
         $validator = Validator::make($request->all(), [
-            'name' => ['required'],
-            // 'email' => ['required','email'],
+            // 'name' => ['required'],
+            'email' => ['required','email'],
             // 'password' => ['min:8', 'sometimes', 'nullable'],
             // 'role' => ['sometimes', 'required'],
         ]);
@@ -129,7 +129,8 @@ class AuthController extends Controller
 
         $updateUser->name = $request->name;;
         $updateUser->email = $request->email;
-        $updateUser->role = $request->role;
+        // $updateUser->role = $request->role;
+        $updateUser->role = Auth::user()->role;
         $updateUser->password = bcrypt($request->password);
 
         // if($request->password) {

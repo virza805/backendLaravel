@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ContactController;
@@ -59,6 +60,20 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
 
     // Route::get('/user-list-for-select2', [AuthController::class, 'user_list_for_select2']);
 
+    
+// Admin all user api ( Create, Read, Update, Delete )
+    Route::group(['prefix' => '/s_admin'], function () {
+
+        Route::get('/backend-user-list', [AdminUserController::class, 'all_user']); // Read Admin all user data by user
+        Route::post('/store', [AdminUserController::class, 'store']); // admin add user data
+        Route::get('/get/{id}', [AdminUserController::class, 'get']);  // Read single user data
+
+        Route::put('/update/{id}', [AdminUserController::class, 'update']);
+        Route::post('/delete', [AdminUserController::class, 'delete']);
+
+        Route::post('/delete-multi', [AdminUserController::class, 'delete_multi']);
+
+    });
 
 
 // Task api ( Create, Read, Update, Delete )
@@ -184,9 +199,6 @@ Route::group(['prefix' => '/all' ], function() {
     Route::get('/client-footer-open-time', [FooterTopController::class, 'frontend_footer_open_time']); // Read last 4 footer data in frontend
     Route::get('/client-categories', [CategoriesController::class, 'frontendShow']); // Read Categories data in frontend
     Route::get('/client-footer-top-cat', [CategoriesController::class, 'frontendShowBeforeFooter']); // Read Categories data in frontend
-
-
-
 
     Route::get('/client-sub-categories', [SubCategoriesController::class, 'frontendShow']); // Read Sub Categories data in frontend
     Route::get('/client-slider', [SliderController::class, 'frontendShow']); // Read all slider data in frontend
