@@ -23,8 +23,8 @@ class FooterTopController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'dec' => ['required'],
-            'title' => ['required'],
+            // 'dec' => ['required'],
+            // 'title' => ['required'],
             // 'icon_img' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 

@@ -133,7 +133,7 @@ Thanks!
 
 
 
-
+https://laravel.com/docs/8.x/eloquent-resources
 
 
 
