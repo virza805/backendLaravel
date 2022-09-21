@@ -23,7 +23,7 @@ class FooterTopController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            // 'dec' => ['required'],
+            // 'description' => ['required'],
             // 'title' => ['required'],
             // 'icon_img' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
@@ -130,7 +130,7 @@ class FooterTopController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'dec' => ['required'],
+            'description' => ['required'],
             'title' => ['required'],
             // 'icon_img' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
@@ -144,7 +144,7 @@ class FooterTopController extends Controller
         $updateTask = FooterTop::find($id);
 
         $updateTask->title = $request->title;;
-        $updateTask->dec = $request->dec;
+        $updateTask->description = $request->description;
         $updateTask->icon_img = $request->icon_img;
 
 

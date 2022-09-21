@@ -135,7 +135,7 @@ Thanks!
 
 https://laravel.com/docs/8.x/eloquent-resources
 
-
+#  php artisan serve --port=8001 |=> for change
 
 
 
