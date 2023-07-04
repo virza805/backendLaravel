@@ -145,9 +145,9 @@ class CategoriesController extends Controller
         }
         $updateTask = Categories::find($id);
 
-        $updateTask->slug = $request->slug;;
+        $updateTask->slug = $request->slug;
         $updateTask->name = $request->name;
-        $updateTask->image = $request->image;
+        // $updateTask->image = $request->image;
 
 
         // $book = Footer::create($request->except('image'));

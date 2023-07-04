@@ -86,6 +86,7 @@ MAIL_ENCRYPTION=tls
 
 
 # php artisan make:model TaskList -a => for new table in database
+# php artisan make:model Tags -a => for new table in database
 
 # php artisan migrate =>
 
@@ -129,14 +130,25 @@ We will be with you as soon as we are able.
 Thanks!
 }
 
+php artisan make:model Order -mc
 
 
 
 
-https://laravel.com/docs/8.x/eloquent-resources
 
-#  php artisan serve --port=8001 |=> for change
 
+
+
+
+
+sandboxemp@gifttowallet.com
+b5UNvn!pL5
+SAND-RG-6
+
+https://github.com/barryvdh/laravel-dompdf | for create pdf
+
+spatie/laravel-permission
+laraveldaily/laravel-invoices
 
 
 

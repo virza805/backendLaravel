@@ -23,8 +23,8 @@ class FooterTopController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            // 'description' => ['required'],
-            // 'title' => ['required'],
+            'description' => ['required'],
+            'title' => ['required'],
             // 'icon_img' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
@@ -145,7 +145,7 @@ class FooterTopController extends Controller
 
         $updateTask->title = $request->title;;
         $updateTask->description = $request->description;
-        $updateTask->icon_img = $request->icon_img;
+        // $updateTask->icon_img = $request->icon_img;
 
 
         // $book = Footer::create($request->except('icon_img'));

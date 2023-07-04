@@ -29,6 +29,6 @@ class ContactMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.contact-mail', ['contact' => $this->contact])->to($this->contact->email)->from('tanvir@vir-za.com')->subject('Bengal Shop received your message');
+        return $this->view('emails.contact-mail', ['contact' => $this->contact])->to($this->contact->email)->from('virza.bd@gmail.com')->subject('Bengal Shop received your message');
     }
 }

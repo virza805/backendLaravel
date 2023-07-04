@@ -25,10 +25,23 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'description' => ['required'],
+            // 'description' => ['required'],
             'name' => ['required'],
             // 'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
+
+        // $categories = $request->input('categories');
+        // $categories = $request->input['category_id'];
+        // $categoryIds = explode(",", $categories);
+        // if ( is_array( $col ) ) {
+        //     $col = array_map( 'intval', $col );
+        //     $col = implode( ',', $col );
+        //     // Insert $taxonomy_terms into your database table
+        // }
+        // $validated['category_id'] = $categoryIds;
+
+
+
 
         if ($validator->fails()) {
             return response()->json([
@@ -115,7 +128,53 @@ class ProductController extends Controller
                     ->paginate(8);
             }
         }else{
-            $product_data = Product::where('status', 1)->orderBy('id', 'DESC')->paginate(8);
+            // $product_data = Product::where('status', 1)->orderBy('id', 'DESC')->paginate(8);
+            /*
+
+                $product_data = DB::table('products as a')
+                            ->select('a.*',
+                                DB::raw('GROUP_CONCAT(DISTINCT b.name) as category_name'),
+                                DB::raw('GROUP_CONCAT(DISTINCT b.id) as cat_id'),
+                                DB::raw('GROUP_CONCAT(DISTINCT c.name) as tag_name'),
+                                DB::raw('GROUP_CONCAT(DISTINCT c.id) as tag_id')
+                            )
+                            ->join('categories as b', DB::raw('FIND_IN_SET(b.id, a.category_id)'), '>', DB::raw('0'))
+                            ->join('tags as c', DB::raw('FIND_IN_SET(c.id, a.tag)'), '>', DB::raw('0'))
+                            ->where('a.status', '=', 1)
+                            ->groupBy('a.id')
+                            ->orderBy('a.id', 'DESC')
+                            ->paginate(8); //->paginate(8); //
+            */
+
+            $product_data = DB::table('products as a')
+            ->select('a.*',
+                DB::raw('CONCAT("[", GROUP_CONCAT(DISTINCT CONCAT("{\"id\":", b.id, ",\"name\":\"", b.name, "\"}")), "]") as categories'),
+                DB::raw('CONCAT("[", GROUP_CONCAT(DISTINCT CONCAT("{\"id\":", c.id, ",\"name\":\"", c.name, "\"}")), "]") as tags')
+            )
+            ->join('categories as b', DB::raw('FIND_IN_SET(b.id, a.category_id)'), '>', DB::raw('0'))
+            ->join('tags as c', DB::raw('FIND_IN_SET(c.id, a.tag)'), '>', DB::raw('0'))
+            ->where('a.status', '=', 1)
+            ->groupBy('a.id')
+            ->orderBy('a.id', 'DESC')
+            ->paginate(8);
+
+                        /*
+                            $product_data = Product::selectRaw('
+                                products.*,
+                                    GROUP_CONCAT(DISTINCT categories.name) as category_name,
+                                    GROUP_CONCAT(DISTINCT categories.id) as cat_id,
+                                    GROUP_CONCAT(DISTINCT tags.name) as tag_name,
+                                    GROUP_CONCAT(DISTINCT tags.id) as tag_id')
+                                ->join('category_product', 'category_product.product_id', '=', 'products.id')
+                                ->join('categories', 'category_product.category_id', '=', 'categories.id')
+                                ->join('product_tag', 'product_tag.product_id', '=', 'products.id')
+                                ->join('tags', 'product_tag.tag_id', '=', 'tags.id')
+                                ->where('products.status', 1)
+                                ->groupBy('products.id')
+                                ->orderBy('products.id', 'DESC')
+                                ->paginate(8);
+                            */
+
         }
 
         // $stock = 1;
@@ -168,9 +227,36 @@ class ProductController extends Controller
      */
     public function get($id)
     {
-        $book = Product::find($id);
+        // $products = Product::find($id);
+        
+        // $products = DB::select('
+        // SELECT a.*,
+        //     GROUP_CONCAT(DISTINCT b.name) as category_name,
+        //     GROUP_CONCAT(DISTINCT b.id) as cat_id,
+        //     GROUP_CONCAT(DISTINCT c.name) as tag_name,
+        //     GROUP_CONCAT(DISTINCT c.id) as tag_id
+        // FROM products a
+        // JOIN categories b ON find_in_set(b.id, a.category_id)
+        // JOIN tags c ON find_in_set(c.id, a.tag)
+        // WHERE
+        // p.id = :id', ['id' => $id]);
 
-        return response()->json($book, 200);
+        $products = DB::table('products as a')
+                    ->select('a.*',
+                        DB::raw('CONCAT("[", GROUP_CONCAT(DISTINCT CONCAT("{\"id\":", b.id, ",\"name\":\"", b.name, "\"}")), "]") as categories'),
+                        DB::raw('CONCAT("[", GROUP_CONCAT(DISTINCT CONCAT("{\"id\":", c.id, ",\"name\":\"", c.name, "\"}")), "]") as tags')
+                    )
+                    ->join('categories as b', function ($join) {
+                        $join->on(DB::raw('FIND_IN_SET(b.id, a.category_id)'), '!=', DB::raw('0'));
+                    })
+                    ->join('tags as c', function ($join) {
+                        $join->on(DB::raw('FIND_IN_SET(c.id, a.tag)'), '!=', DB::raw('0'));
+                    })
+                    ->where('a.id', '=', $id)
+                    ->first();
+
+
+        return response()->json($products, 200);
     }
 
     /**

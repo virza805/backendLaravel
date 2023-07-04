@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SubCategoriesController;
 use App\Http\Controllers\TaskListController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // use Illuminate\Support\Facades\Auth;
@@ -60,8 +61,8 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
 
     // Route::get('/user-list-for-select2', [AuthController::class, 'user_list_for_select2']);
 
-    
-// Admin all user api ( Create, Read, Update, Delete )
+
+    // Admin all user api ( Create, Read, Update, Delete )
     Route::group(['prefix' => '/s_admin'], function () {
 
         Route::get('/backend-user-list', [AdminUserController::class, 'all_user']); // Read Admin all user data by user
@@ -76,7 +77,7 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
     });
 
 
-// Task api ( Create, Read, Update, Delete )
+    // Task api ( Create, Read, Update, Delete )
     Route::group(['prefix' => '/task'], function () {
         Route::get('/task-list', [TaskListController::class, 'task_list']); // Read all task by search & pagination
         Route::post('/store', [TaskListController::class, 'store']); // add task
@@ -89,7 +90,7 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
         Route::post('/delete-multi', [TaskListController::class, 'delete_multi']);
     });
 
-// ContactMessage api ( Read & Delete )
+    // ContactMessage api ( Read & Delete )
     Route::group(['prefix' => '/sms'], function () {
         Route::get('/messages', [ContactController::class, 'allMessage']); // Read all message by pagination(10/per page)
         Route::post('/delete', [ContactController::class, 'delete']);
@@ -97,7 +98,7 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
     });
 
 
-// Footer api ( Create, Read, Update, Delete )
+    // Footer api ( Create, Read, Update, Delete )
     Route::group(['prefix' => '/footer'], function () {
 
         Route::get('/backend-footer-list', [FooterController::class, 'backend_footer_list']); // Read all footer data
@@ -108,7 +109,7 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
         Route::post('/delete', [FooterController::class, 'delete']);
 
     });
-// Footer Top & Opening Houre api ( Create, Read, Update, Delete )
+    // Footer Top & Opening Houre api ( Create, Read, Update, Delete )
     Route::group(['prefix' => '/footer-top'], function () {
 
         Route::get('/backend-footer-list', [FooterTopController::class, 'backend_footer_list']); // Read all footer data
@@ -120,7 +121,7 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
 
     });
 
-// Categories api ( Create, Read, Update, Delete )
+    // Categories api ( Create, Read, Update, Delete )
     Route::group(['prefix' => '/cat'], function () {
 
         Route::get('/backend-cat-list', [CategoriesController::class, 'backendShowList']); // Read all Categories data by user
@@ -136,7 +137,7 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
 
     });
 
-// Sub Categories api ( Create, Read, Update, Delete )
+    // Sub Categories api ( Create, Read, Update, Delete )
     Route::group(['prefix' => '/sub-cat'], function () {
 
         Route::get('/backend-sub-cat-list', [SubCategoriesController::class, 'backendShowList']); // Read all Categories data by user
@@ -148,7 +149,7 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
 
     });
 
-// Slider & Buy 1 Get 1 api ( Create, Read, Update, Delete )
+    // Slider & Buy 1 Get 1 api ( Create, Read, Update, Delete )
     Route::group(['prefix' => '/slider'], function () {
 
         Route::get('/backend-slider-list', [SliderController::class, 'backendShowList']); // Read all Categories data by user
@@ -164,12 +165,12 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
 
     });
 
-// Product ( Create, Read, Update, Delete )
+    // Product ( Create, Read, Update, Delete )
     Route::group(['prefix' => '/product'], function () {
 
-        Route::get('/backend-product-list', [ProductController::class, 'backendShowList']); // Read all Categories data by user
-        Route::post('/store', [ProductController::class, 'store']); // add Categories data
-        Route::get('/get/{id}', [ProductController::class, 'get']);  // Read current user Categories data
+        Route::get('/backend-product-list', [ProductController::class, 'backendShowList']); // Read all Product data by user
+        Route::post('/store', [ProductController::class, 'store']); // add Product data
+        Route::get('/get/{id}', [ProductController::class, 'get']);  // Read current user Product data
 
         Route::put('/update/{id}', [ProductController::class, 'update']);
         Route::post('/delete', [ProductController::class, 'delete']);
@@ -177,6 +178,15 @@ Route::group(['prefix' => '/user', 'middleware'=>['auth:api'], 'namespace' => 'A
         Route::post('/delete-multi', [ProductController::class, 'delete_multi']);
         Route::post('/add-buy-get', [ProductController::class, 'use']);
         Route::post('/remove-buy-get', [ProductController::class, 'un_use']);
+
+    });
+
+    // Order ( Create, Read, Update, Delete )
+    Route::group(['prefix' => '/order'], function () {
+        Route::post('/store', [OrderController::class, 'stripeOrder']); // add Order data
+        Route::get('/invoice/{id}', [OrderController::class, 'generateInvoice']); // download Order data
+        Route::get('/show/{id}', [OrderController::class, 'showInvoice']); // view Order data
+        Route::get('/order', [OrderController::class, 'show']); // show all Order data
 
     });
 
@@ -205,5 +215,6 @@ Route::group(['prefix' => '/all' ], function() {
     Route::get('/client-buy-get', [SliderController::class, 'buyOneGetOne']); // Read all slider->use data in frontend
     Route::get('/client-product', [ProductController::class, 'frontendShow']); // Read all slider->use data in frontend
     Route::get('/client-cat-product/{id}', [ProductController::class, 'frontendShowCatP']); // Read Categories ways product data Show in frontend
+    Route::get('/get/{id}', [CategoriesController::class, 'get']);  // Read Category data
     Route::get('/client-product-detail/{id}', [ProductController::class, 'get']);  // Read current user Categories data
 });
